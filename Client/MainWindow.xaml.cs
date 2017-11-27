@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CodingDojo4
+namespace Client
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

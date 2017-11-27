@@ -7,6 +7,83 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Right" Height="40">
+            <Button Content="Start" Width="100" Margin="5" Background="AliceBlue" />
+            <Button Content="Stop" Width="100" Margin="5" Background="AliceBlue" />
+        </StackPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Chat">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <Label Grid.Column="0" Content="Connected Users:" Margin="10,15,10,10"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <TextBlock MinHeight="150"/>
+                        <Button Content="Drop"  Width="60" Margin="5" Background="AliceBlue" HorizontalAlignment="Right" />
+                    </StackPanel>
+                    </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Label Grid.Column="0" Content="Received Messages:" Margin="10,15,10,10"/>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <TextBlock MinHeight="150"/>
+                                </StackPanel>
+                        </Border>
+                        <Button Content="Save to log"  Width="295" Margin="5" Background="AliceBlue" HorizontalAlignment="Center" />
+
+                    </StackPanel>
+                </Grid>
+                
+            </TabItem>
+
+            <TabItem Header="Logs">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="0">
+                        <Label Grid.Column="0" Content="Log files:" Margin="10,15,10,10"/>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <TextBlock MinHeight="150"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="Show"  Width="60" Margin="0,5,5.333,5" Background="AliceBlue" HorizontalAlignment="Right" />
+                                    <Button Content="Drop"  Width="60" Margin="5" Background="AliceBlue" HorizontalAlignment="Right" />
+                                </StackPanel>
+                                
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Label Grid.Column="0" Content="Log Messages:" Margin="10,15,10,10"/>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <TextBlock MinHeight="180"/>
+                            </StackPanel>
+                        </Border>
+                   
+                    </StackPanel>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

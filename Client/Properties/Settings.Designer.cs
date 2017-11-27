@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodingDojo4.Properties
+namespace Client.Properties
 {
 
 
