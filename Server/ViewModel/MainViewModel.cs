@@ -1,34 +1,36 @@
 using GalaSoft.MvvmLight;
+using Server.Communication;
+using System.Collections.ObjectModel;
 
 namespace Server.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+
+        private Communication.Server server;
+        private const string ip = "127.0.0.1";
+        private const int port = 8080;
+        private bool isConnected = false;
+
+        public ObservableCollection<ClientHandler> Clients { get; set; }
+
+        public ObservableCollection<string> Messages { get; set; }
+
+        public string SelectedUser { get; set; }
+
+        public int CountReceivedMessages { get { return Messages.Count; } }
+
+
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            Messages = new ObservableCollection<string>();
+            Clients = new ObservableCollection<ClientHandler>();
+        }
+
+        public void UpdateGUIWithNewMessage (string message)
+        {
+
         }
     }
 }
