@@ -14,12 +14,14 @@ namespace Server.Communication
         Socket server;
         List<ClientHandler> clients = new List<ClientHandler>();
         Thread threadAccepting;
+        Action<String> GuiUpdater;
         
 
-        public Server()
+        public Server(string ip, int port, Action<string> updater)
         {
+            GuiUpdater = updater;
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            server.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"),8080));
+            server.Bind(new IPEndPoint(IPAddress.Parse(ip),port));
             server.Listen(15);
 
             Task.Factory.StartNew(StartAccepting);
@@ -43,7 +45,7 @@ namespace Server.Communication
                 try
                 {
                     //constructor erweitern
-                    clients.Add(new ClientHandler(server.Accept()));
+                    clients.Add(new ClientHandler(server.Accept(), new Action<string, Socket>(NewMessageReceived)));
                     Console.WriteLine("Neuer Client akzeptiert!");
                 }
                 catch (Exception e)
@@ -81,7 +83,18 @@ namespace Server.Communication
             }
         }
 
-        // new message received function
+        public void NewMessageReceived(string message, Socket clientSender)
+        {
+            GuiUpdater(message);
+
+            foreach (var item in clients)
+            {
+                if(item.client != clientSender)
+                {
+                item.Send(message);
+                }
+            }
+        }
 
     }
 
