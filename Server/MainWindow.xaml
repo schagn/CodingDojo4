@@ -17,8 +17,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Right" Height="40">
-            <Button Content="Start" Width="100" Margin="5" Background="AliceBlue" />
-            <Button Content="Stop" Width="100" Margin="5" Background="AliceBlue" />
+            <Button Content="Start" Width="100" Margin="5" Background="AliceBlue" Command="{Binding StartBtnClick}" />
+            <Button Content="Stop" Width="100" Margin="5" Background="AliceBlue" Command="{Binding StoppBtnClick}" />
         </StackPanel>
 
         <TabControl Grid.Row="1">
@@ -33,8 +33,8 @@
                         <Label Grid.Column="0" Content="Connected Users:" Margin="10,15,10,10" DataContext="{Binding Clients.Count, Mode=OneWay}"/>
                         <Border BorderBrush="Black" BorderThickness="1" Margin="5">
                             <StackPanel Grid.Column="0" Orientation="Vertical">
-                                <ListBox MinHeight="150" DataContext="{Binding Clients}"/>
-                                <Button Content="Drop"  Width="60" Margin="5" Background="AliceBlue" HorizontalAlignment="Right" />
+                                <ListBox MinHeight="150" ItemsSource="{Binding Clients}" SelectedIndex="{Binding SelectedUser}"/>
+                                <Button Content="Drop"  Width="60" Margin="5" Background="AliceBlue" HorizontalAlignment="Right" Command="{Binding DropUserBtnClick}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -43,10 +43,10 @@
                         <Label Grid.Column="0" Content="Received Messages:"  Margin="10,15,10,10" DataContext="{Binding Messages.Count, Mode=OneWay}"/>
                         <Border BorderBrush="Black" BorderThickness="1" Margin="5">
                             <StackPanel Grid.Column="0" Orientation="Vertical">
-                                <ListBox MinHeight="150" DataContext="{Binding Messages}"/>
+                                <ListBox MinHeight="150" ItemsSource="{Binding Messages}"/>
                             </StackPanel>
                         </Border>
-                        <Button Content="Save to log"  Width="285" Margin="5" Background="AliceBlue" HorizontalAlignment="Center" />
+                        <Button Content="Save to log"  Width="285" Margin="5" Background="AliceBlue" HorizontalAlignment="Center" Command="{Binding SaveToLogBtnClick}" />
 
                     </StackPanel>
                 </Grid>

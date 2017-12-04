@@ -16,16 +16,16 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Chat Name:" Margin="5" FontSize="14"/>
                 <TextBox Width="100" Margin="5" DataContext="{Binding ChatName}"/>
-                <Button Content="Connect" Width="100" Margin="200,5,5,5" Background="AliceBlue" />
+                <Button Content="Connect" Width="100" Margin="200,5,5,5" Background="AliceBlue" Command="{Binding ConnectBtnClick}" />
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="5,20,5,5">
                 <Label Content="Messages" />
-                <ListBox Height="200" DataContext="{Binding ReceivedMessages}" />
+                <ListBox Height="200" ItemsSource="{Binding ReceivedMessages}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Message:" />
                 <TextBox Width="200" Margin="5" DataContext="{Binding Message}"/>
-                <Button Content="Send" Width="150" Margin="85,5,5,5" Background="AliceBlue" />
+                <Button Content="Send" Width="150" Margin="85,5,5,5" Background="AliceBlue" Command="{Binding SendBtnClick}" />
 
             </StackPanel>
 
