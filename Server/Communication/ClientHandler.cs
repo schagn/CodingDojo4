@@ -12,36 +12,37 @@ namespace Server.Communication
         private byte[] buffer = new byte[2048];
         private Thread threadClient;
         const string endMessage = "@quit";
-        private Action<string, Socket> action;
+        private Action<string, Socket> ActionMessage;
 
         public string Name { get; private set; }
 
-        public Socket client { get; private set; }
+        public Socket Client { get; private set; }
 
         public ClientHandler(Socket sock, Action<string, Socket> action)
         {
-            this.client = sock;
-            this.action = action;
-            client = sock;
-            Task.Factory.StartNew(Receive);
+            this.Client = sock;
+            this.ActionMessage = action;
+            threadClient = new Thread(Receive);
+            threadClient.Start();
+            //Task.Factory.StartNew(Receive);
             Send("Hello new Client!\r\n");
         }
 
         public void Send(string message)
         {
-            client.Send(Encoding.UTF8.GetBytes(message));
+            Client.Send(Encoding.UTF8.GetBytes(message));
 
         }
 
         public void Receive() // noch ausuführlicher !! 
         {
-            int length;
             string message = "";
             
 
-            while (message != null && message != endMessage)
+            //while (message != null && message != endMessage)
+            while (!message.Equals(endMessage))
             {
-                length = client.Receive(buffer);
+                int length = Client.Receive(buffer);
                 message = Encoding.UTF8.GetString(buffer, 0, length);
                
                 Console.WriteLine(Encoding.UTF8.GetString(buffer, 0, length));
@@ -50,17 +51,19 @@ namespace Server.Communication
                 {
                     Name = message.Split(':')[0];
                 }
-                action(message, client);
+                ActionMessage(message, Client);
             }
             Close();
         }
 
-       public void Close()
+       
+
+            public void Close()
         {
             //quit message senden
             Send(endMessage);
-            this.client.Close(1);
-            threadClient.Abort();
+            this.Client.Close(1);
+            this.threadClient.Abort();
             
         }
 

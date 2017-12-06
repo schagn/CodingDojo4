@@ -3,6 +3,7 @@ using Client.Communication;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
+using System.Windows.Input;
 
 namespace Client.ViewModel
 {
@@ -29,6 +30,7 @@ namespace Client.ViewModel
                 {
                     isConnected = true;
                     client = new Communication.Client("127.0.0.1", 8080, DisconnectClient, new Action<string>(NewMessageReceived));
+                    
                 },
                 () =>
                 {
@@ -40,7 +42,7 @@ namespace Client.ViewModel
                 {
                     isConnected = true;
                     client.Send(ChatName + ": " + Message);
-                    ReceivedMessages.Add("YOU:" + Message);
+                    ReceivedMessages.Add("YOU: " + Message);
                 },
                 () =>
                 {
@@ -52,7 +54,7 @@ namespace Client.ViewModel
         private void DisconnectClient()
         {
             isConnected = false;
-            client.Close();
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void NewMessageReceived(string message)
@@ -60,6 +62,7 @@ namespace Client.ViewModel
             App.Current.Dispatcher.Invoke(() =>
             {
                 ReceivedMessages.Add(message);
+                //RaisePropertyChanged("ReceivedMessages");
             });
 
         }

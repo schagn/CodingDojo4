@@ -2,7 +2,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Server.Communication;
 using System.Collections.ObjectModel;
-
+using System.Linq;
+using System.Collections.Generic;
+using CodingDojo4_DataHandler;
 
 namespace Server.ViewModel
 {
@@ -14,6 +16,7 @@ namespace Server.ViewModel
         private const string ip = "127.0.0.1";
         private const int port = 8080;
         private bool isConnected = false;
+        private DataHandler dataHandler;
 
         public ObservableCollection<string> Clients { get; set; }
 
@@ -34,6 +37,7 @@ namespace Server.ViewModel
         {
             Messages = new ObservableCollection<string>();
             Clients = new ObservableCollection<string>();
+            dataHandler = new DataHandler();
 
             StartBtnClick = new RelayCommand(
                 () =>
@@ -75,7 +79,8 @@ namespace Server.ViewModel
             SaveToLogBtnClick = new RelayCommand(
                () =>
                {
-                   // to be defined
+                   dataHandler.Save(Messages.ToList());
+                   RaisePropertyChanged("LogFiles");
                    
                },
                () =>
@@ -98,7 +103,7 @@ namespace Server.ViewModel
                     }
                     Messages.Add(message);
 
-                    RaisePropertyChanged("NoOfReceivedMessages");
+                    RaisePropertyChanged("CountReceivedMessages");
                 }
 
                 );

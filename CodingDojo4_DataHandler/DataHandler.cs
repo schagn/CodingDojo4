@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace CodingDojo4_DataHandler
 {
+
     public class DataHandler
     {
         private const string extension = ".txt";
         private const string target = "C:/Benutzer";
 
+        public static void Main(string[] args)
+        {
+
+        }
 
         public String[] Load(string name)
         {

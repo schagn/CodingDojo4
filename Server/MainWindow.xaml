@@ -30,17 +30,21 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Vertical" Grid.Column="0">
-                        <Label Grid.Column="0" Content="Connected Users:" Margin="10,15,10,10" DataContext="{Binding Clients.Count, Mode=OneWay}"/>
+                        <Label Grid.Column="0" Content="Connected Users" Margin="10,15,10,10"/>
                         <Border BorderBrush="Black" BorderThickness="1" Margin="5">
                             <StackPanel Grid.Column="0" Orientation="Vertical">
-                                <ListBox MinHeight="150" ItemsSource="{Binding Clients}" SelectedIndex="{Binding SelectedUser}"/>
+                                <ListBox MinHeight="150" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedUser}"/>
+
                                 <Button Content="Drop"  Width="60" Margin="5" Background="AliceBlue" HorizontalAlignment="Right" Command="{Binding DropUserBtnClick}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <Label Grid.Column="0" Content="Received Messages:"  Margin="10,15,10,10" DataContext="{Binding Messages.Count, Mode=OneWay}"/>
+                        <StackPanel Orientation="Horizontal">
+                        <Label Grid.Column="0" Content="Received Messages:"  Margin="10,15,5,10"/>
+                            <Label Content="{Binding CountReceivedMessages}" Margin="5" VerticalAlignment="Center" />
+                        </StackPanel>
                         <Border BorderBrush="Black" BorderThickness="1" Margin="5">
                             <StackPanel Grid.Column="0" Orientation="Vertical">
                                 <ListBox MinHeight="150" ItemsSource="{Binding Messages}"/>

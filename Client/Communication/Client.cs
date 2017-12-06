@@ -23,7 +23,9 @@ namespace Client.Communication
                 this.AbortInformer = abort;
                 this.MessageInformer = message;
                 TcpClient client = new TcpClient();
+                //client.ConnectAsync(IPAddress.Parse(ip), port);
                 client.Connect(IPAddress.Parse(ip),port);
+               // client.Connect(new IPEndPoint(IPAddress.Parse(ip), port));
                 clientSocket = client.Client;
                 StartReceiving();
 
@@ -33,7 +35,7 @@ namespace Client.Communication
                 // informer
                 MessageInformer("Server is not ready");
                 AbortInformer();
-                throw;
+                
             }
         }
 

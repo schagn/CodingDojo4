@@ -50,7 +50,7 @@ namespace Server.Communication
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    //throw new Exception("Server hat ein Problem");
                 }
                
             }
@@ -89,7 +89,7 @@ namespace Server.Communication
 
             foreach (var item in clients)
             {
-                if(item.client != clientSender)
+                if(item.Client != clientSender)
                 {
                 item.Send(message);
                 }
