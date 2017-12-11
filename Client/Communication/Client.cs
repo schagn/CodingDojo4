@@ -49,7 +49,7 @@ namespace Client.Communication
         {
             string message = "";
             int length;
-            while(!message.Equals("@quit"))
+            while(!message.Contains("@quit"))
             {
                 length = clientSocket.Receive(buffer);
                 message = Encoding.UTF8.GetString(buffer, 0, length);

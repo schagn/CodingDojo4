@@ -37,10 +37,9 @@ namespace Server.Communication
         public void Receive() // noch ausuführlicher !! 
         {
             string message = "";
-            
 
             //while (message != null && message != endMessage)
-            while (!message.Equals(endMessage))
+            while (!message.Contains(endMessage))
             {
                 int length = Client.Receive(buffer);
                 message = Encoding.UTF8.GetString(buffer, 0, length);

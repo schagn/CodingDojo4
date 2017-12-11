@@ -101,6 +101,10 @@ namespace Server.ViewModel
                     {
                         Clients.Add(name);
                     }
+                    if(message.Contains("@quit"))
+                    {
+                        server.DisconnectSpecificClient(name);
+                    }
                     Messages.Add(message);
 
                     RaisePropertyChanged("CountReceivedMessages");
